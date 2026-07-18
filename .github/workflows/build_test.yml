@@ -35,10 +35,11 @@ jobs:
   deploy:
     needs: build_and_test
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' 
     steps:
       - name: Deploy to production
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
-          api-key: ${{ secrets.MY_RENDER_API_KEY }}
+          service-id: ${{ secrets.SERVICE_ID }}
+          api-key: ${{ secrets.API_KEY}}
           
