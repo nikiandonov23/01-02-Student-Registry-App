@@ -9,7 +9,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_and_test:
+
 
     strategy:
       matrix:
@@ -31,3 +32,13 @@ jobs:
       
     - name: Step name:Run the tests
       run: npm test
+  deploy:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
+          
