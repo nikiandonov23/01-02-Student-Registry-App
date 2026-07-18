@@ -11,16 +11,20 @@ on:
 jobs:
   build:
 
+    strategy:
+      matrix:
+        node-version: [ 20,22,24 ]
+
     runs-on: ubuntu-latest
 
     steps:
     - name: Step name:Chene the repository
       uses: actions/checkout@v5
       
-    - name: Step name:Use of the Node.js 20 version
+    - name: Step name:Use of the Node.js 20 ,22 ,24 version
       uses: actions/setup-node@v5
       with:
-        node-version: 24
+        node-version: ${{ matrix.node-version }}
 
     - name: Step name:Installing of the dependancies    
       run: npm install
